@@ -25,8 +25,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ui.MainViewModel
-import com.example.myapplication.ui.common.NavigationScreen.FourthScreen
+import com.example.myapplication.ui.common.NavigationScreen.FifthScreen
 import com.example.myapplication.ui.common.NavigationScreen.FirstScreen
+import com.example.myapplication.ui.common.NavigationScreen.FourthScreen
 import com.example.myapplication.ui.common.NavigationScreen.SecondScreen
 import com.example.myapplication.ui.common.NavigationScreen.ThirdScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
@@ -83,9 +84,11 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screens.First.route,
                             modifier = Modifier.padding(paddingValues = paddingValues)
                         ) {
+                            //composable functions can execute in any order
+                            //navigation
                             composable(Screens.First.route) {
                                 //call our composable screens here
-                                FirstScreen(viewModel)
+                                FirstScreen()
                             }
                             composable(Screens.Second.route) {
                                 //call our composable screens here
@@ -98,6 +101,10 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.Fourth.route) {
                                 //call our composable screens here
                                 FourthScreen()
+                            }
+                            composable(Screens.Fifth.route) {
+                                //call our composable screens here
+                                FifthScreen()
                             }
                         }
                     }
@@ -127,6 +134,9 @@ data class BottomNavigationItem(
             BottomNavigationItem(
                 label = "Fourth", route = Screens.Fourth.route
             ),
+            BottomNavigationItem(
+                label = "Fifth", route = Screens.Fifth.route
+            ),
         )
     }
 }
@@ -136,4 +146,5 @@ sealed class Screens(val route: String) {
     data object Second : Screens("second_route")
     data object Third : Screens("third_route")
     data object Fourth : Screens("fourth_route")
+    data object Fifth : Screens("fifth_route")
 }
